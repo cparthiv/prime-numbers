@@ -1,13 +1,9 @@
-arr = [2]
-for num in range(2, 1000000):
-   if num > 1:
-       for i in arr:
-           if (num % i) == 0:
-               break
-       else:
-           arr.append(num)
-           # print(num)
+def primes(n):
+    sieve = [True] * n
+    for i in range(3,int(n**0.5)+1,2):
+        if sieve[i]:
+            sieve[i*i::2*i]=[False]*((n-i*i-1)//(2*i)+1)
+    return [2] + [i for i in range(3,n,2) if sieve[i]]
 f = open("primes.txt","a")
-
-f.write(str(arr))
+f.write(str(list(primes(100000000))))
 f.close()
